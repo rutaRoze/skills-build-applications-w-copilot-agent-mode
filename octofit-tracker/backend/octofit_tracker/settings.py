@@ -28,8 +28,13 @@ SECRET_KEY = 'django-insecure-hm5()zkrbjj^ya27vo@(kasv$8ba5i07f$zo=#g85umkdiy^aa
 DEBUG = True
 
 
-# Allow all hosts
-ALLOWED_HOSTS = ['*']
+
+# Allow codespace URL and localhost
+import os
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME')
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if CODESPACE_NAME:
+    ALLOWED_HOSTS.append(f'{CODESPACE_NAME}-8000.app.github.dev')
 
 
 DATABASES = {
@@ -70,7 +75,6 @@ MIDDLEWARE = [
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
-]
 
 ROOT_URLCONF = 'octofit_tracker.urls'
 
